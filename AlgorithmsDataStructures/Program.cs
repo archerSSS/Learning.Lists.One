@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BitOne
+namespace AlgorithmsDataStructures
 {
     class Program
     {
@@ -13,7 +13,6 @@ namespace BitOne
             LinkedList s_list = new LinkedList();
             Node n1 = new Node(12);
             Node n2 = new Node(15);
-            Node n3 = new Node(17);
             s_list.AddInTail(n1);
             s_list.AddInTail(n2);
             s_list.AddInTail(new Node(128));
