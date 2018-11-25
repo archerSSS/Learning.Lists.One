@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using AlgorithmsDataStructures;
+using BitOne;
 
 namespace UnitTestProject1
 {
