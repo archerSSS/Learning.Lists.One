@@ -6,6 +6,17 @@ using System.Threading.Tasks;
 
 namespace AlgorithmsDataStructures
 {
+    public class Node
+    {
+        public int value;
+        public Node next;
+
+        public Node(int _value)
+        {
+            value = _value;
+        }
+    }
+
     public class LinkedList
     {
         public Node head;
@@ -16,8 +27,7 @@ namespace AlgorithmsDataStructures
             head = null;
             tail = null;
         }
-
-
+        
         public void AddInTail(Node item)
         {
             if (head == null) head = item;
