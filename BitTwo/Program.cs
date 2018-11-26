@@ -10,15 +10,15 @@ namespace BitTwo
     {
         static void Main(string[] args)
         {
-            LinkedList2 l2 = new LinkedList2();
-            l2.AddInTail(new Node(1));
-            l2.AddInTail(new Node(2));
-            l2.AddInTail(new Node(3));
-            l2.AddInTail(new Node(4));
+            LinkedList l = new LinkedList();
+            l.AddInTail(new Node(1));
+            l.AddInTail(new Node(2));
+            l.AddInTail(new Node(3));
+            l.AddInTail(new Node(4));
 
-            Console.WriteLine(l2.head.value);
-            Console.WriteLine(l2.head.next.value);
-            Console.WriteLine(l2.head.next.next.value);
+            Console.WriteLine(l.head.value);
+            Console.WriteLine(l.head.next.value);
+            Console.WriteLine(l.head.next.next.value);
 
             Console.ReadKey();
         }

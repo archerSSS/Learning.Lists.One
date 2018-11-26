@@ -18,12 +18,12 @@ namespace BitTwo
         }
     }
 
-    public class LinkedList2
+    public class LinkedList
     {
         public Node head;
         public Node tail;
 
-        public LinkedList2()
+        public LinkedList()
         {
             head = null;
             tail = null;

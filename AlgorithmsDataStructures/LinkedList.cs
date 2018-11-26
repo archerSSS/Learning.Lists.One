@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AlgorithmsDataStructures
 {
@@ -10,11 +7,7 @@ namespace AlgorithmsDataStructures
     {
         public int value;
         public Node next;
-
-        public Node(int _value)
-        {
-            value = _value;
-        }
+        public Node(int _value) { value = _value; }
     }
 
     public class LinkedList
@@ -27,38 +20,50 @@ namespace AlgorithmsDataStructures
             head = null;
             tail = null;
         }
-        
-        public void AddInTail(Node item)
+
+        public void AddInTail(Node _item)
         {
-            if (head == null) head = item;
-            else tail.next = item;
-            tail = item;
+            if (head == null)   head = _item;
+            else                tail.next = _item;
+            tail = _item;
         }
 
-        public Node Find(int val)
+        public Node Find(int _value)
         {
             Node node = head;
             while (node != null)
             {
-                if (node.value == val) return node;
+                if (node.value == _value) return node;
                 node = node.next;
             }
             return null;
         }
+        
+        public List<Node> FindAll(int _value)
+        {
+            List<Node> nodes = new List<Node>();
+            Node node = head;
+            while (node != null)
+            {
+                if (node.value == _value) nodes.Add(node);
+                node = node.next;
+            }
+            return nodes;
+        }
 
-        public bool Remove(int val)
+        public bool Remove(int _value)
         {
             Node present = head;
             Node previous = null;
             if (head == null) return false;
             while (present != null)
             {
-                if (head.value == val)
+                if (head.value == _value)
                 {
                     head = head.next;
                     return true;
                 }
-                else if (present.value == val)
+                else if (present.value == _value)
                 {
                     if (present.next == null) tail = previous;
 
@@ -72,16 +77,16 @@ namespace AlgorithmsDataStructures
             return false;
         }
 
-        public void RemoveAll(int val)
+        public void RemoveAll(int _value)
         {
             Node present = head;
             Node previous = null;
             if (head == null) return;
             while (present != null)
             {
-                if (head.value == val)
+                if (head.value == _value)
                     head = head.next;
-                else if (present.value == val)
+                else if (present.value == _value)
                 {
                     present = present.next;
                     previous.next = present;
@@ -99,18 +104,6 @@ namespace AlgorithmsDataStructures
             tail = null;
         }
 
-        public List<Node> FindAll(int val)
-        {
-            Node node = head;
-            List<Node> nodes = new List<Node>();
-            while (node != null)
-            {
-                if (node.value == val) nodes.Add(node);
-                node = node.next;
-            }
-            return nodes;
-        }
-
         public int Count()
         {
             Node node = head;
@@ -123,18 +116,20 @@ namespace AlgorithmsDataStructures
             return sum;
         }
 
-        public void InsertAfter(int index, Node new_node)
+        public void InsertAfter(Node _nodeAfter, Node _nodeToInsert)
         {
-            Node node = head;
-            for (int x = 0; x < Count(); x++)
+            if (_nodeAfter != null && head != null)
             {
-                if (x == index)
-                {
-                    new_node.next = node.next;
-                    node.next = new_node;
-                }
-                if (node.next == null) tail = node;
-                node = node.next;
+                if (_nodeAfter.next != null)
+                    _nodeToInsert.next = _nodeAfter.next;
+                else
+                    tail = _nodeToInsert;
+                _nodeAfter.next = _nodeToInsert;
+            }
+            else if (head == null)
+            {
+                head = _nodeToInsert;
+                tail = _nodeToInsert;
             }
         }
 
