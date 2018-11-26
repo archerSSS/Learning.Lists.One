@@ -132,24 +132,5 @@ namespace AlgorithmsDataStructures
                 tail = _nodeToInsert;
             }
         }
-
-        public LinkedList GetCombinedList(LinkedList l1, LinkedList l2)
-        {
-            LinkedList new_list = new LinkedList();
-            Node firstNode = l1.head;
-            Node secondNode = l2.head;
-
-            if (l1.Count() == l2.Count())
-            {
-                for (int x = 0; x < l1.Count(); x++)
-                {
-                    new_list.AddInTail(new Node(firstNode.value + secondNode.value));
-                    firstNode = firstNode.next;
-                    secondNode = secondNode.next;
-                }
-                return new_list;
-            }
-            return null;
-        }
     }
 }
