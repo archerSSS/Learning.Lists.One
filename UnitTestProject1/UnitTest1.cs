@@ -39,8 +39,10 @@ namespace UnitTestProject1
             Assert.AreEqual(tailExpected, foundedNode2.value);
         }
 
+        // Тест. Корректность удаления элемента.
+        // Удаляется один последний элемент.
         [TestMethod]
-        public void TestDelete()
+        public void TestRemove_A()
         {
             //value expected in list's head and tail
             //
@@ -56,8 +58,31 @@ namespace UnitTestProject1
             Assert.AreEqual(tailExpected, list.tail.value);
         }
 
+        // Тест. Корректность удаления элемента
+        // из списка с одним элементом.
         [TestMethod]
-        public void TestDeleteMultiple()
+        public void TestRemove_B()
+        {
+            //value expected in list's head and tail after first remove
+            int expectedA = 9;
+
+            LinkedList list = new LinkedList();
+            list.AddInTail(new Node(3));
+            list.AddInTail(new Node(9));
+
+            list.Remove(3);
+
+            Assert.AreEqual(expectedA, list.head.value);
+            Assert.AreEqual(expectedA, list.tail.value);
+
+            list.Remove(9);
+
+            Assert.AreEqual(null, list.head);
+            Assert.AreEqual(null, list.tail);
+        }
+
+        [TestMethod]
+        public void TestRemoveAll()
         {
             //value expected in list's head and tail
             //
@@ -155,25 +180,6 @@ namespace UnitTestProject1
             Assert.AreEqual(expectedC, list.head.next.value);
             Assert.AreEqual(expectedC, list.tail.value);
             Assert.AreEqual(expectedC, afterNode.next.value);
-        }
-
-        [TestMethod]
-        public void TestGetCombinedList()
-        {
-            //value expected in list's head and tail
-            //
-            int headExpected = 7;
-            int tailExpected = 15;
-
-            LinkedList list1 = new LinkedList();
-            LinkedList list2 = new LinkedList();
-            list1.AddInTail(new Node(3));
-            list1.AddInTail(new Node(6));
-            list2.AddInTail(new Node(4));
-            list2.AddInTail(new Node(9));
-            LinkedList list3 = list1.GetCombinedList(list1, list2);
-            Assert.AreEqual(headExpected, list3.head.value);
-            Assert.AreEqual(tailExpected, list3.tail.value);
         }
     }
 }

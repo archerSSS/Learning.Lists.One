@@ -53,20 +53,20 @@ namespace AlgorithmsDataStructures
 
         public bool Remove(int _value)
         {
+            if (head == null) return false;
             Node present = head;
             Node previous = null;
-            if (head == null) return false;
             while (present != null)
             {
                 if (head.value == _value)
                 {
+                    if (head == tail) tail = null;
                     head = head.next;
                     return true;
                 }
                 else if (present.value == _value)
                 {
                     if (present.next == null) tail = previous;
-
                     present = present.next;
                     previous.next = present;
                     return true;
