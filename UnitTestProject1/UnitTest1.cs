@@ -82,7 +82,7 @@ namespace UnitTestProject1
         }
 
         [TestMethod]
-        public void TestRemoveAll()
+        public void TestRemoveAll_A()
         {
             //value expected in list's head and tail
             //
@@ -98,6 +98,27 @@ namespace UnitTestProject1
             list.RemoveAll(3);
             Assert.AreEqual(headExpected, list.head.value);
             Assert.AreEqual(tailExpected, list.tail.value);
+        }
+
+        // Тест. Все узлы имеют одно и то же значение
+        [TestMethod]
+        public void TestRemoveAll_B()
+        {
+            
+
+            LinkedList list = new LinkedList();
+            list.AddInTail(new Node(3));
+
+            list.RemoveAll(3);
+            Assert.AreEqual(null, list.head);
+            Assert.AreEqual(null, list.tail);
+
+            list.AddInTail(new Node(3));
+            list.AddInTail(new Node(3));
+
+            list.RemoveAll(3);
+            Assert.AreEqual(null, list.head);
+            Assert.AreEqual(null, list.tail);
         }
 
         // Тест. Добавляет три узла и внедряет один после выбранного.

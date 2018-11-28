@@ -79,13 +79,16 @@ namespace AlgorithmsDataStructures
 
         public void RemoveAll(int _value)
         {
+            if (head == null) return;
             Node present = head;
             Node previous = null;
-            if (head == null) return;
             while (present != null)
             {
                 if (head.value == _value)
+                {
+                    if (head == tail) tail = null;
                     head = head.next;
+                }
                 else if (present.value == _value)
                 {
                     present = present.next;
@@ -95,6 +98,7 @@ namespace AlgorithmsDataStructures
                 previous = present;
                 present = present.next;
             }
+            if (tail == null) return;
             tail = previous;
         }
 
