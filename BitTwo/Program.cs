@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BitTwo
+namespace AlgorithmsDataStructures
 {
     class Program
     {
         static void Main(string[] args)
         {
-            LinkedList l = new LinkedList();
+            LinkedList2 l = new LinkedList2();
             l.AddInTail(new Node(1));
             l.AddInTail(new Node(2));
             l.AddInTail(new Node(3));

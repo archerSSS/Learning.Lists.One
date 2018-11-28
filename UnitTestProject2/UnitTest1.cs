@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using BitTwo;
+using AlgorithmsDataStructures;
 
 namespace UnitTestProject2
 {
@@ -8,7 +8,7 @@ namespace UnitTestProject2
     public class UnitTest1
     {
         [TestMethod]
-        public void TestDelete()
+        public void TestRemove_A()
         {
             //value expected in head after first delete
             int expected1 = 1;
@@ -18,21 +18,42 @@ namespace UnitTestProject2
             //value expected in tail after first delete
             int expected3 = 3;
 
-            LinkedList l = new LinkedList();
+            LinkedList2 l = new LinkedList2();
             l.AddInTail(new Node(1));
             l.AddInTail(new Node(2));
             l.AddInTail(new Node(3));
             l.AddInTail(new Node(4));
 
-            l.Delete(4);
+            l.Remove(4);
 
             Assert.AreEqual(expected1, l.head.value);
             Assert.AreEqual(expected2, l.head.next.value);
             Assert.AreEqual(expected3, l.tail.value);
 
-            l.Delete(1);
+            l.Remove(1);
 
             Assert.AreEqual(expected2, l.head.value);
+        }
+
+        [TestMethod]
+        public void TestRemove_B()
+        {
+
+            int expectedA = 1;
+            // Ожидаемое значение если элемент был удален
+            bool expectedB = true;
+            // Ожидаемое значение если элемент не был удален
+            bool expectedC = false;
+
+            LinkedList2 l = new LinkedList2();
+            l.AddInTail(new Node(1));
+            bool res1 = l.Remove(2);
+            bool res2 = l.Remove(1);
+
+            Assert.AreEqual(expectedC, res1);
+            Assert.AreEqual(expectedB, res2);
+            Assert.AreEqual(null, l.head);
+            Assert.AreEqual(null, l.tail);
         }
 
         [TestMethod]
@@ -51,7 +72,7 @@ namespace UnitTestProject2
             Node newNode = new Node(3);
 
             // Создает новый список
-            LinkedList l = new LinkedList();
+            LinkedList2 l = new LinkedList2();
 
             // Добавляем в список узлы со значениями 1, 2 и 4
             //
@@ -94,7 +115,7 @@ namespace UnitTestProject2
             Node newNode = new Node(3);
 
             // Creating new list
-            LinkedList l = new LinkedList();
+            LinkedList2 l = new LinkedList2();
             // Adding new nodes
             //
             l.AddInTail(new Node(1));
@@ -107,35 +128,6 @@ namespace UnitTestProject2
             Assert.AreEqual(expectedNew, l.tail.value);
             // Comparing. value =3 and value of third node
             Assert.AreEqual(expectedNew, l.head.next.next.value);
-        }
-
-        [TestMethod]
-        public void TestAddHead()
-        {
-            //first head's value / tail's
-            int expected1 = 1;
-            //new head's value
-            int expected2 = 2;
-            //third node's value
-            int expected3 = 3;
-
-            //Creating new List
-            LinkedList l = new LinkedList();
-            l.AddInHead(new Node(1));
-
-            Assert.AreEqual(expected1, l.head.value);
-            Assert.AreEqual(expected1, l.tail.value);
-
-            l.AddInHead(new Node(2));
-
-            Assert.AreEqual(expected2, l.head.value);
-            Assert.AreEqual(expected1, l.head.next.value);
-            Assert.AreEqual(expected1, l.tail.value);
-
-            l.AddInHead(new Node(3));
-
-            Assert.AreEqual(expected3, l.head.value);
-            Assert.AreEqual(expected1, l.tail.value);
         }
     }
 }

@@ -4,76 +4,93 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BitTwo
+namespace AlgorithmsDataStructures
 {
     public class Node
     {
         public int value;
-        public Node next;
-        public Node prev;
+        public Node next, prev;
 
         public Node(int _value)
         {
             value = _value;
+            next = null;
+            prev = null;
         }
     }
 
-    public class LinkedList
+    public class LinkedList2
     {
         public Node head;
         public Node tail;
 
-        public LinkedList()
+        public LinkedList2()
         {
             head = null;
             tail = null;
         }
 
-        public void AddInTail(Node item)
+        public void AddInTail(Node _item)
         {
             if (head == null)
             {
-                head = item;
-                item.prev = null;
-                item.next = null;
+                head = _item;
+                head.next = null;
+                head.prev = null;
             }
             else
             {
-                tail.next = item;
-                item.prev = tail;
+                tail.next = _item;
+                _item.prev = tail;
             }
-            tail = item;
+            tail = _item;
         }
 
-        public Node Find(int val)
+        public Node Find(int _value)
         {
             Node node = head;
             while (node != null)
             {
-                if (node.value == val)
+                if (node.value == _value)
                     return node;
                 node = node.next;
             }
             return null;
         }
 
-        public void Delete(int val)
+        public bool Remove(int _value)
         {
             Node node = head;
             while (node != null)
             {
-                if (node.value == val)
+                if (node.value == _value)
                 {
-                    if (node.next == null)
-                        tail = node.prev;
-                    if (node.prev != null)
-                        node.prev.next = node.next;
-                    else
-                        head = head.next;
-                    return;
+                    if (node.next == null) tail = node.prev;
+                    if (node.prev != null) node.prev.next = node.next;
+                    else head = head.next;
+                    return true;
                 }
                 node = node.next;
             }
+            return false;
+        }
+
+        public void Clear()
+        {
+            head = null;
+            tail = null;
+        }
+
+        public int Count()
+        {
+            Node node = head;
+            int sum = 0;
+            while (node != null)
+            {
+                sum++;
+                node = node.next;
+            }
+            return sum;
         }
 
         public void InsertAfter(Node afterNode, Node newNode)
@@ -97,17 +114,6 @@ namespace BitTwo
             }
             // Задаем next-узел после выбранного узла
             afterNode.next = newNode;
-        }
-
-        public void AddInHead(Node newHead)
-        {
-            if (head == null)
-            {
-                head = newHead;
-                tail = newHead;
-            }
-            newHead.next = head;
-            head = newHead;
         }
     }
 }
