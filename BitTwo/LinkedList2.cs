@@ -62,9 +62,31 @@ namespace AlgorithmsDataStructures
             {
                 if (node.value == _value)
                 {
-                    if (node.next == null) tail = node.prev;
-                    if (node.prev != null) node.prev.next = node.next;
-                    else head = head.next;
+                    if (head == tail)
+                    {
+                        head = null;
+                        tail = null;
+                        return true;
+                    }
+                    if (node == head)
+                    {
+                        if (head.next == tail) tail.prev = null;
+                        head = head.next;
+                        node = head;
+                    }
+                    else if (node == tail)
+                    {
+                        if (tail.prev == head) head.next = null;
+                        tail = tail.prev;
+                        node = tail;
+                    }
+                    else
+                    {
+                        node = node.prev;
+                        node.next = node.next.next;
+                        node.next.prev = node;
+                    }
+                    
                     return true;
                 }
                 node = node.next;
