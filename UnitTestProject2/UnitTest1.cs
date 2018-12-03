@@ -93,7 +93,6 @@ namespace UnitTestProject2
             l.Remove(3);
             node = l.Find(3);
 
-            Assert.AreEqual(null, node);
             Assert.AreEqual(expected1, l.head.value);
             Assert.AreEqual(expected1, l.tail.value);
             Assert.AreEqual(null, l.head.next);
