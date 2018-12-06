@@ -72,14 +72,12 @@ namespace AlgorithmsDataStructures
                     {
                         head = head.next;
                         node.next.prev = node.prev;
-                        node = node.next;
                         return true;
                     }
                     else if (node.next == null)
                     {
                         tail = tail.prev;
                         node.prev.next = node.next;
-                        node = node.prev;
                         return true;
                     }
                     else
@@ -92,6 +90,39 @@ namespace AlgorithmsDataStructures
                 node = node.next;
             }
             return false;
+        }
+
+        public void RemoveAll(int _value)
+        {
+            Node node = head;
+            while (node != null)
+            {
+                if (node.value == _value)
+                {
+                    if (node == head && node == tail)
+                    {
+                        head = null;
+                        tail = null;
+                        return;
+                    }
+                    else if (node.prev == null)
+                    {
+                        head = head.next;
+                        node.next.prev = node.prev;
+                    }
+                    else if (node.next == null)
+                    {
+                        tail = tail.prev;
+                        node.prev.next = node.next;
+                    }
+                    else
+                    {
+                        node.prev.next = node.next;
+                        node.next.prev = node.prev;
+                    }
+                }
+                node = node.next;
+            }
         }
 
         public void Clear()

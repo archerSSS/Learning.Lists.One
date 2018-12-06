@@ -94,7 +94,6 @@ namespace UnitTestProject2
             Console.WriteLine(l.head.next.value);
             
             l.Remove(3);
-            node = l.Find(3);
 
             Assert.AreEqual(expected1, l.head.value);
             Assert.AreEqual(expected1, l.tail.value);
@@ -134,6 +133,62 @@ namespace UnitTestProject2
             Assert.AreEqual(expected4, l.tail.prev.next.value);
             Assert.AreEqual(expected2, l.tail.prev.value);
             Assert.AreEqual(null, l.tail.prev.next.next);
+        }
+
+        [TestMethod]
+        public void TestRemoveAll_A()
+        {
+            // value expected in prev of tail
+            int expected1 = 1;
+            // value expected in next of head
+            int expected5 = 5;
+
+            LinkedList2 l = new LinkedList2();
+            l.AddInTail(new Node(1));
+            l.AddInTail(new Node(3));
+            l.AddInTail(new Node(3));
+            l.AddInTail(new Node(5));
+
+            l.RemoveAll(3);
+
+            Assert.AreEqual(expected1, l.tail.prev.value);
+            Assert.AreEqual(expected5, l.head.next.value);
+        }
+
+        [TestMethod]
+        public void TestRemoveAll_B()
+        {
+            // value expected in head, next of head, tail, prev of tail
+            int expected2 = 2;
+
+            LinkedList2 l = new LinkedList2();
+            l.AddInTail(new Node(1));
+            l.AddInTail(new Node(1));
+            l.AddInTail(new Node(2));
+            l.AddInTail(new Node(1));
+            l.AddInTail(new Node(2));
+            l.AddInTail(new Node(2));
+            l.AddInTail(new Node(1));
+
+            l.RemoveAll(1);
+
+            Assert.AreEqual(expected2, l.head.value);
+            Assert.AreEqual(expected2, l.head.next.value);
+            Assert.AreEqual(expected2, l.tail.value);
+            Assert.AreEqual(expected2, l.tail.prev.value);
+        }
+
+        [TestMethod]
+        public void TestRemoveAll_C()
+        {
+            LinkedList2 l = new LinkedList2();
+            l.AddInTail(new Node(1));
+            l.AddInTail(new Node(1));
+
+            l.RemoveAll(1);
+
+            Assert.AreEqual(null, l.head);
+            Assert.AreEqual(null, l.tail);
         }
 
         [TestMethod]
