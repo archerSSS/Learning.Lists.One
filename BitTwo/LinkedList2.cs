@@ -55,6 +55,19 @@ namespace AlgorithmsDataStructures
             return null;
         }
 
+        public List<Node> FindAll(int _value)
+        {
+            List<Node> list = new List<Node>();
+            Node node = head;
+            while (node != null)
+            {
+                if (node.value == _value)
+                    list.Add(node);
+                node = node.next;
+            }
+            return list;
+        }
+
         public bool Remove(int _value)
         {
             Node node = head;

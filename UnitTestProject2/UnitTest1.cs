@@ -1,12 +1,33 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using AlgorithmsDataStructures;
+using System.Collections.Generic;
 
 namespace UnitTestProject2
 {
     [TestClass]
     public class UnitTest1
     {
+        [TestMethod]
+        public void TestFindAll_A()
+        {
+            LinkedList2 l = new LinkedList2();
+            l.AddInTail(new Node(1));
+            l.AddInTail(new Node(2));
+            l.AddInTail(new Node(1));
+            l.AddInTail(new Node(2));
+            l.AddInTail(new Node(1));
+
+            Node node1 = l.Find(1);
+            Node node2 = node1.next.next;
+            Node node3 = node2.next.next;
+
+            List<Node> list = l.FindAll(1);
+            Assert.AreEqual(node1, list[0]);
+            Assert.AreEqual(node2, list[1]);
+            Assert.AreEqual(node3, list[2]);
+        }
+
         [TestMethod]
         public void TestRemove_A()
         {
