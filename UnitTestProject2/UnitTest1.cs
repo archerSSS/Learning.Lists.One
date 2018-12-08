@@ -23,9 +23,13 @@ namespace UnitTestProject2
             Node node3 = node2.next.next;
 
             List<Node> list = l.FindAll(1);
+            
             Assert.AreEqual(node1, list[0]);
+            Assert.AreEqual(node2, list[0].next);
             Assert.AreEqual(node2, list[1]);
+            Assert.AreEqual(node1, list[1].prev);
             Assert.AreEqual(node3, list[2]);
+            Assert.AreEqual(null, list[2].next);
         }
 
         [TestMethod]
@@ -284,6 +288,66 @@ namespace UnitTestProject2
             Assert.AreEqual(expectedNew, l.tail.value);
             // Comparing. value =3 and value of third node
             Assert.AreEqual(expectedNew, l.head.next.next.value);
+        }
+
+        [TestMethod]
+        public void TestInsertAfter_C()
+        {
+            // value expected in node-head in all phases except 1st
+            int expected1 = 1;
+            // value expected in: 
+            // 2nd-node(tail) in phases: 2, 3
+            // 3rd-node(tail) in phase 4
+            // 3rd-node in phase 5
+            int expected2 = 2;
+            // value expected in 4th-node(tail) in phase 5
+            int expected3 = 3;
+            // value expected in 2nd-node in phase 4
+            int expected10 = 10;
+
+
+            LinkedList2 l = new LinkedList2();
+
+            // 1st phase
+            //
+            l.InsertAfter(null, new Node(2));
+            Assert.AreEqual(null, l.head);
+
+            // 2nd phase
+            //
+            l.InsertAfter(new Node(1), new Node(2));
+            Assert.AreEqual(expected1, l.head.value);
+            Assert.AreEqual(expected2, l.head.next.value);
+            Assert.AreEqual(expected1, l.tail.prev.value);
+            Assert.AreEqual(expected2, l.tail.value);
+
+            // 3rd phase
+            //
+            l.InsertAfter(new Node(2), new Node(3));
+            Assert.AreEqual(expected1, l.head.value);
+            Assert.AreEqual(expected2, l.head.next.value);
+            Assert.AreEqual(expected1, l.tail.prev.value);
+            Assert.AreEqual(expected2, l.tail.value);
+
+            // 4th phase
+            //
+            Node node = l.head;
+            l.InsertAfter(node, new Node(10));
+            Assert.AreEqual(expected1, l.head.value);
+            Assert.AreEqual(expected10, l.head.next.value);
+            Assert.AreEqual(expected10, l.tail.prev.value);
+            Assert.AreEqual(expected2, l.tail.value);
+            Assert.AreEqual(expected1, node.value);
+            Assert.AreEqual(expected10, node.next.value);
+
+            // 5th phase
+            //
+            node = l.tail;
+            l.InsertAfter(node, new Node(3));
+            Assert.AreEqual(expected3, l.tail.value);
+            Assert.AreEqual(expected2, l.tail.prev.value);
+            Assert.AreEqual(expected3, l.head.next.next.next.value);
+            Assert.AreEqual(expected2, l.head.next.next.next.prev.value);
         }
     }
 }
