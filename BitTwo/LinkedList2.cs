@@ -169,13 +169,9 @@ namespace AlgorithmsDataStructures
             // Если список пуст, то...
             if (head == null)
             {
-                // prev выбранного узла обнуляется
-                afterNode.prev = null;
-                // prev нового узла присваивает выбранный узел
-                newNode.prev = afterNode;
-                // head списка присваивает выбранный узел
-                head = afterNode;
-                // tail списка присваивает нвоый узел
+                // head и tail списка присваивает новый узел
+                //
+                head = newNode;
                 tail = newNode;
             }
             // Если next-узел выбранного узла отсутствует, то...
