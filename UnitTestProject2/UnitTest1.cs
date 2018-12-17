@@ -216,6 +216,58 @@ namespace UnitTestProject2
             Assert.AreEqual(null, l.tail);
         }
 
+        // Тест на удаление двух элементов из середины списка
+        // Список проверяется на наличие всех элементов после удаления
+        //
+        [TestMethod]
+        public void TestRemoveAll_D()
+        {
+            // ожидаемое значение в 1-ом и 2-ом узлах
+            int exp0 = 0;
+            // ожидаемое значение в 3-ем и 4-ом узлах
+            int exp2 = 2;
+            // количество оставшихся узлов после удаления
+            int exp4 = 4;
+
+
+            LinkedList2 l = new LinkedList2();
+            l.AddInTail(new Node(0));
+            l.AddInTail(new Node(0));
+            l.AddInTail(new Node(1));
+            l.AddInTail(new Node(1));
+            l.AddInTail(new Node(2));
+            l.AddInTail(new Node(2));
+
+            l.RemoveAll(1);
+
+            Assert.AreEqual(exp0, l.head.value);
+            Assert.AreEqual(exp0, l.head.next.value);
+            Assert.AreEqual(exp0, l.head.next.prev.value);
+            Assert.AreEqual(null, l.head.prev);
+            Assert.AreEqual(null, l.head.next.prev.prev);
+            Assert.AreEqual(null, l.head.next.next.prev.prev.prev);
+            Assert.AreEqual(exp0, l.head.next.next.prev.value);
+            Assert.AreEqual(exp2, l.head.next.next.next.prev.value);
+            Assert.AreEqual(exp2, l.head.next.next.value);
+            Assert.AreEqual(exp2, l.head.next.next.next.value);
+            Assert.AreEqual(exp2, l.head.next.next.next.prev.value);
+            Assert.AreEqual(exp0, l.head.next.next.prev.value);
+            Assert.AreEqual(exp0, l.head.next.next.prev.prev.value);
+            Assert.AreEqual(null, l.head.next.next.next.next);
+            Assert.AreEqual(null, l.head.next.next.prev.prev.prev);
+            Assert.AreEqual(exp2, l.tail.value);
+            Assert.AreEqual(exp2, l.tail.prev.value);
+            Assert.AreEqual(exp0, l.tail.prev.prev.value);
+            Assert.AreEqual(exp0, l.tail.prev.prev.prev.value);
+            Assert.AreEqual(exp0, l.tail.prev.prev.prev.next.value);
+            Assert.AreEqual(exp2, l.tail.prev.prev.prev.next.next.value);
+            Assert.AreEqual(exp2, l.tail.prev.prev.prev.next.next.next.value);
+            Assert.AreEqual(null, l.tail.prev.prev.prev.prev);
+            Assert.AreEqual(null, l.tail.prev.prev.prev.next.next.next.next);
+
+            Assert.AreEqual(exp4, l.Count());
+        }
+
         [TestMethod]
         public void TestInsertAfter_A()
         {
