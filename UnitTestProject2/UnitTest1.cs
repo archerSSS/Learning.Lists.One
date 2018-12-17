@@ -269,6 +269,31 @@ namespace UnitTestProject2
         }
 
         [TestMethod]
+        public void TestRemove_E()
+        {
+            LinkedList2 l = new LinkedList2();
+            l.AddInTail(new Node(0));
+            l.AddInTail(new Node(0));
+            l.AddInTail(new Node(1));
+            l.AddInTail(new Node(1));
+            l.AddInTail(new Node(1));
+            l.AddInTail(new Node(3));
+            l.AddInTail(new Node(3));
+            l.AddInTail(new Node(2));
+            l.AddInTail(new Node(2));
+            
+            l.Remove(1);
+            l.RemoveAll(3);
+            l.Remove(1);
+
+            Assert.AreEqual(0, l.head.value);
+            Assert.AreEqual(0, l.head.next.value);
+            Assert.AreEqual(1, l.head.next.next.value);
+            Assert.AreEqual(0, l.head.next.next.prev.value);
+            Assert.AreEqual(1, l.head.next.next.next.prev.value);
+        }
+
+        [TestMethod]
         public void TestInsertAfter_A()
         {
             // Ожидаемое значение в найденом узле -- второй в списке
