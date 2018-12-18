@@ -25,11 +25,8 @@ namespace UnitTestProject2
             List<Node> list = l.FindAll(1);
             
             Assert.AreEqual(node1, list[0]);
-            Assert.AreEqual(node2, list[0].next);
             Assert.AreEqual(node2, list[1]);
-            Assert.AreEqual(node1, list[1].prev);
             Assert.AreEqual(node3, list[2]);
-            Assert.AreEqual(null, list[2].next);
         }
 
         [TestMethod]

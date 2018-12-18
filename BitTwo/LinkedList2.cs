@@ -59,16 +59,10 @@ namespace AlgorithmsDataStructures
         {
             List<Node> list = new List<Node>();
             Node node = head;
-            Node prev = null;
             while (node != null)
             {
                 if (node.value == _value)
-                {
-                    if (prev != null) prev.next = node;
-                    node.prev = prev;
-                    prev = node;
-                    list.Add(prev);
-                }
+                    list.Add(node);
                 node = node.next;
             }
             return list;
