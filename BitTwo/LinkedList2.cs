@@ -31,16 +31,16 @@ namespace AlgorithmsDataStructures
         {
             if (head == null)
             {
-                head = _item;
-                head.next = null;
-                head.prev = null;
+                this.head = _item;
+                this.head.next = null;
+                this.head.prev = null;
             }
             else
             {
-                tail.next = _item;
+                this.tail.next = _item;
                 _item.prev = tail;
             }
-            tail = _item;
+            this.tail = _item;
         }
 
         public Node Find(int _value)
