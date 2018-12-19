@@ -157,29 +157,41 @@ namespace AlgorithmsDataStructures
             return sum;
         }
 
-        public void InsertAfter(Node afterNode, Node newNode)
+        public void InsertAfter(Node _nodeAfter, Node _nodeToInsert)
         {
-            // Если параметру не задан узел или список пуст, то метод завершает работу.
-            if (afterNode == null || newNode == null || head == null) return;
-            // Если next-узел выбранного узла отсутствует, то...
-            if (afterNode.next == null)
+            // Если новый узел не задан, то метод завершает работу.
+            if (_nodeToInsert == null) return;
+            // Если указанный узел пуст, то...
+            if (_nodeAfter == null)
             {
-                // Задаем prev-узел нового узла
-                newNode.prev = afterNode;
-                // Если выбранный узел идентичен узлу tail, то задаем tail новый узел
-                if (afterNode == tail) tail = newNode;
+                // Если список пуст, то... ставим новый элемент в начале списка
+                if (head == null) head = _nodeToInsert;
+                // Иначе вставляем нвоый элемент в конец списка
+                else tail.next = _nodeToInsert;
+                // Присваиваем tail новый элемент
+                tail = _nodeToInsert;
+                return;
             }
+            // Иначе если next указанного узла отсутствует, то...
+            else if (_nodeAfter.next == null)
+            {
+                // Задаем prev нового узла
+                _nodeToInsert.prev = _nodeAfter;
+                // Если указанный узел идентичен узлу tail, то задаем tail новый узел
+                if (_nodeAfter == tail) tail = _nodeToInsert;
+            }
+            // Иначе...
             else
             {
                 // Задаем next-узел после нового узла
-                newNode.next = afterNode.next;
+                _nodeToInsert.next = _nodeAfter.next;
                 // Задаем prev-узел перед новым узлом
-                newNode.prev = afterNode;
+                _nodeToInsert.prev = _nodeAfter;
                 // Задаем prev-узел узла стоящего после нового узла
-                afterNode.next.prev = newNode;
+                _nodeAfter.next.prev = _nodeToInsert;
             }
             // Задаем next-узел после выбранного узла
-            afterNode.next = newNode;
+            _nodeAfter.next = _nodeToInsert;
         }
     }
 }

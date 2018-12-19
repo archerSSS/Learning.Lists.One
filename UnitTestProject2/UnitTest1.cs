@@ -379,14 +379,12 @@ namespace UnitTestProject2
         [TestMethod]
         public void TestInsertAfter_D()
         {
-            LinkedList2 l1 = new LinkedList2();
-            LinkedList2 l2 = new LinkedList2();
-            l1.AddInTail(new Node(1));
-            Node node = l1.Find(1);
+            LinkedList2 l = new LinkedList2();
+            Node node = l.Find(1);
+            l.InsertAfter(node, new Node(4));
 
-            l2.InsertAfter(node, new Node(4));
-
-            Assert.AreEqual(null, l2.head);
+            Assert.AreEqual(4, l.head.value);
+            Assert.AreEqual(4, l.tail.value);
         }
     }
 }
