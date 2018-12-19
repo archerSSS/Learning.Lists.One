@@ -293,14 +293,14 @@ namespace UnitTestProject2
         [TestMethod]
         public void TestInsertAfter_A()
         {
-            // Ожидаемое значение в найденом узле -- второй в списке
-            int expectedNode = 2;
+            // Ожидаемое значение во 2-ом узле
+            int exp2 = 2;
 
-            // Ожидаемое значение в новом узле -- третий в списке после метода AddNextTo()
-            int expectedNew = 3;
+            // Ожидаемое значение после вставки. В новом 3-ем узле 
+            int exp3 = 3;
 
-            // Ожидаемое значение в узле -- в списке третий до метода AddNextTo() и четвертый после
-            int expectedNext = 4;
+            // Ожидаемое значение до вставки. В 3-ем узле
+            int exp4 = 4;
 
             // Создает новый узел
             Node newNode = new Node(3);
@@ -314,28 +314,26 @@ namespace UnitTestProject2
             l.AddInTail(new Node(2));
             l.AddInTail(new Node(4));
 
-            // Присваиваем ссылку на найденный узел из списка локальному объекту
+            // Находим узел из списка
             Node afterNode = l.Find(2);
 
             // Добавляем в список новый узел после указанного
             l.InsertAfter(afterNode, newNode);
 
             // Сравнение. Ожидаемое значение (3) == Актуальное третьего узла
-            Assert.AreEqual(expectedNew, l.head.next.next.value);
+            Assert.AreEqual(exp3, l.head.next.next.value);
             // Сравнение. Ожидаемое значение (4) == Актуальное четвертого узла
-            Assert.AreEqual(expectedNext, l.head.next.next.next.value);
+            Assert.AreEqual(exp4, l.head.next.next.next.value);
             // Сравнение. Ожидаемое значение (2) == prev'а нового узла
-            Assert.AreEqual(expectedNode, newNode.prev.value);
+            Assert.AreEqual(exp2, newNode.prev.value);
             // Сравнение. Ожидаемое значение (3) == prev'а next'а нового узла
-            Assert.AreEqual(expectedNew, newNode.next.prev.value);
+            Assert.AreEqual(exp3, newNode.next.prev.value);
             // Сравнение. Ожидаемое значение (3) == prev'а третьего узла
-            Assert.AreEqual(expectedNew, l.head.next.next.next.prev.value);
+            Assert.AreEqual(exp3, l.head.next.next.next.prev.value);
             // Сравнение. Ожидаемое значение (3) == prev'а последнего узла
-            Assert.AreEqual(expectedNew, l.tail.prev.value);
+            Assert.AreEqual(exp3, l.tail.prev.value);
             // Сравнение. Ожидаемое значение (3) == next'а второго узла
-            Assert.AreEqual(expectedNew, afterNode.next.value);
-            // Сравнение. Ожидаемое значение (4) == next'а нового узла
-            Assert.AreEqual(expectedNext, newNode.next.value);
+            Assert.AreEqual(exp3, afterNode.next.value);
         }
 
         [TestMethod]
@@ -367,61 +365,28 @@ namespace UnitTestProject2
         [TestMethod]
         public void TestInsertAfter_C()
         {
-            // value expected in: 
-            // 1st-node(head\tail) in phases: 2, 3
-            // 1st-node in phase 4, 5
-            int expected2 = 2;
-            // value expected in 2nd-node(tail) in phase 4
-            // value expected in 2nd-node in phase 5
-            int expected10 = 10;
-            // value expected in 3rd-node(tail) in phase 5
-            int expected3 = 3;
-            
-
-
             LinkedList2 l = new LinkedList2();
+            l.AddInTail(new Node(1));
+            l.AddInTail(new Node(2));
+            l.AddInTail(new Node(3));
 
-            // 1st phase. trying to add first node.
-            //
-            l.InsertAfter(null, new Node(2));
-            Assert.AreEqual(null, l.head);
+            l.InsertAfter(l.Find(1), new Node(4));
 
-            // 2nd phase. adding first node
-            //
-            l.InsertAfter(new Node(1), new Node(2));
-            Assert.AreEqual(expected2, l.head.value);
-            Assert.AreEqual(expected2, l.tail.value);
-            Assert.AreEqual(null, l.head.next);
-            Assert.AreEqual(null, l.tail.prev);
+            Assert.AreEqual(1, l.head.value);
+            Assert.AreEqual(4, l.head.next.value);
+        }
 
-            // 3rd phase. trying to insert new node
-            //
-            l.InsertAfter(new Node(2), new Node(3));
-            Assert.AreEqual(expected2, l.head.value);
-            Assert.AreEqual(null, l.head.next);
-            Assert.AreEqual(null, l.tail.prev);
-            Assert.AreEqual(expected2, l.tail.value);
+        [TestMethod]
+        public void TestInsertAfter_D()
+        {
+            LinkedList2 l1 = new LinkedList2();
+            LinkedList2 l2 = new LinkedList2();
+            l1.AddInTail(new Node(1));
+            Node node = l1.Find(1);
 
+            l2.InsertAfter(node, new Node(4));
 
-            // 4th phase. inserting new node
-            //
-            Node node = l.head;
-            l.InsertAfter(node, new Node(10));
-            Assert.AreEqual(expected2, l.head.value);
-            Assert.AreEqual(expected10, l.head.next.value);
-            Assert.AreEqual(expected2, l.tail.prev.value);
-            Assert.AreEqual(expected10, l.tail.value);
-            Assert.AreEqual(expected2, node.value);
-            Assert.AreEqual(expected10, node.next.value);
-
-            // 5th phase. inserting new node
-            //
-            node = l.tail;
-            l.InsertAfter(node, new Node(3));
-            Assert.AreEqual(expected3, l.tail.value);
-            Assert.AreEqual(expected10, l.tail.prev.value);
-            Assert.AreEqual(expected3, l.head.next.next.value);
-            Assert.AreEqual(expected10, l.head.next.next.prev.value);
+            Assert.AreEqual(null, l2.head);
         }
     }
 }

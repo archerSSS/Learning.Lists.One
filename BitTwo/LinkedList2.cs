@@ -159,18 +159,10 @@ namespace AlgorithmsDataStructures
 
         public void InsertAfter(Node afterNode, Node newNode)
         {
-            // Если параметру не задан узел, то метод завершает работу.
-            if (afterNode == null || newNode == null) return;
-            // Если список пуст, то...
-            if (head == null)
-            {
-                // head и tail списка присваивает новый узел
-                //
-                head = newNode;
-                tail = newNode;
-            }
+            // Если параметру не задан узел или список пуст, то метод завершает работу.
+            if (afterNode == null || newNode == null || head == null) return;
             // Если next-узел выбранного узла отсутствует, то...
-            else if (afterNode.next == null)
+            if (afterNode.next == null)
             {
                 // Задаем prev-узел нового узла
                 newNode.prev = afterNode;
